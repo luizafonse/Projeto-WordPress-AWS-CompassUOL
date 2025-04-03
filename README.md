@@ -31,40 +31,26 @@
   </a>&ensp;
 </div>
 
-> [!IMPORTANT]
-> As únicas aplicações específicas que se pede a utilização no projeto são o **GitHub**, **Amazon Web Services** e o **Docker**. As outras foram questão de preferência!
+> [OBS]
+> Aplicações obrigatórias para o funcionamento são o **GitHub**, **Amazon Web Services** e o **Docker**. Outras utilizações foram opcionais.
 
-> [!TIP]
-> - **GitHub:** Utilizado para a documentação do projeto.
-> - **Amazon Web Services (AWS):** Utilizado para a criação da infraestrutura de TI.
-> - **Microsoft Store:** Utilizado para baixar o WSL e o Ubuntu 24.04.
-> - **WSL (Windows Subsystem for Linux):** Permite executar um ambiente Linux diretamente no sistema operacional Windows.
-> - **Visual Studio Code:** Utilizado como editor de código e terminal.
-> - **Docker:** Utilizado um container do wordpress como servidor web.
+> [Utilizações]
+> - **GitHub:** Documentação do projeto.
+> - **Amazon Web Services (AWS):** Criação da infraestrutura de TI.
+> - **Microsoft Store:** Baixar o WSL e o Ubuntu 24.04.
+> - **WSL (Windows Subsystem for Linux):** Executa um ambiente Linux diretamente no sistema operacional Windows.
+> - **Visual Studio Code:** Editor de código e terminal.
+> - **Docker:** Container do wordpress como servidor web.
 
 ---
 
-## Linguagens utilizadas:
-
-### Bash, Markdown.
-
-<div align="left">
-  <br>
-  <a href="https://www.gnu.org/software/bash/">
-    <img src="https://github.com/Daijinpala/projeto_1/blob/main/logo/bashlogo.jpeg" alt="Bash" width="100" height="100">
-  </a>&ensp;
-
-  <a href="https://www.markdownguide.org/">
-    <img src="https://github.com/Daijinpala/projeto_1/blob/main/logo/marklogo.png" alt="Markdown" width="100" height="100">
-  </a>&ensp;
-</div>
-
-> [!IMPORTANT]
-> Você pode utilizar a linguagem Python ao invés de Bash.
-
-> [!TIP]
+## Linguagens:
 > - **Bash:** É uma linguagem de script e um interpretador de comandos.
 > - **Markdown:** É uma linguagem de marcação leve.
+
+> [OBS]
+> Você pode utilizar a linguagem Python ao invés de Bash.
+
 
 ---
 
