@@ -45,8 +45,9 @@
 ---
 
 ## Linguagens:
-**Bash:** É uma linguagem de script e um interpretador de comandos.
-**Markdown:** É uma linguagem de marcação leve.
+###**Bash:** É uma linguagem de script e um interpretador de comandos.
+
+###**Markdown:** É uma linguagem de marcação leve.
 
 > [OBS]
 > Você pode utilizar a linguagem Python ao invés de Bash.
