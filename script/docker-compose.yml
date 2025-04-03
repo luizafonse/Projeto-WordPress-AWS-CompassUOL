@@ -1,0 +1,19 @@
+services:
+  web:
+    image: wordpress
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: database-wppass.czukggc0s06m.us-east-1.rds.amazonaws.com
+      WORDPRESS_DB_USER: afonsomain
+      WORDPRESS_DB_PASSWORD: teste1234teste
+      WORDPRESS_DB_NAME: db-wordpress
+    volumes:
+      - /home/ec2-user/wordpress:/var/www/html
+    networks:
+      - tunel
+
+networks:
+  tunel:
+    driver: bridge
