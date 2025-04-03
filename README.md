@@ -77,3 +77,76 @@ Ponto adicional para o trabalho utilizar a instalação via script de Start Inst
 ![1](/imgs/doc.png)
 
 <hr>
+
+### Primeira etapa `local`: Criação do ambiente de testes.
+
+<div>
+<details align="left">
+    <summary></summary>
+1 - Baixe o wsl (Pela loja da Microsoft || Por linha de comando).
+
+```
+wsl --install
+```
+
+
+2 - Instale a versão mais atual do ubuntu (Pela loja da Microsoft || Por linha de comando).
+
+```
+wsl --install -d Ubuntu-24.04
+```
+
+3 - Instale o um editor de código de sua preferência (VScode).
+
+```
+https://code.visualstudio.com/download
+```
+
+4 - Faça um conexão ao wsl.
+
+Instale o WSL na Microsoft Store.
+![2](/imgs/WSL.png)
+
+Após isso, aceite as extensões que o seu VSCode deseja instalar. Elas serã responsáveis por fornecer esse suporte a sistemas no Shell do próprio Visual Studio. Após isso, verá estas Aspas, clique nelas;
+![3](/imgs/aspinhas.png)
+
+Selecione "Connect to WSL" e você será redirecionado para uma tela de shell do seu Subsistema.
+![4](/imgs/connecttowsl.png)
+
+Nele, atualize a máquina:
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+Por conseguinte, realize as instalações:
+```
+#Certificados necessários
+sudo apt install -y ca-certificates curl gnupg
+
+#Chave oficial do Docker
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+#Repositório docker no APT
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+#Atualize
+sudo apt update
+
+sudo apt upgrade -y
+
+#Instale o docker e o docker compose.
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+#Opcional, mas recomendado adicionar o usuário ao grupo do docker
+sudo usermod -aG docker $USER
+
+#Habilite o dokcer para iniciar com o sistema, para facilitar seu funcionamento
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+</div>
