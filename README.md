@@ -389,12 +389,12 @@ Após a criação do banco de dados, RDS > escolha o seu banco > security > alte
 
 ![alt text](/imgs/inboundclb.png)
 ![alt text](/imgs/inboundefs1.png)
-![alt text](/imgs/inboundwebserer.png)
+![alt text](/imgs/inboundwebserver.png)
 ![alt text](/imgs/inboundrds.png)
 ![alt text](/imgs/outboundclb.png)
 ![alt text](/imgs/outboundefs1.png)
-![alt text](/imgs/outboundwebserer.png)
 ![alt text](/imgs/outboundrds.png)
+![alt text](/imgs/outboundwebserver.png)
 
 4- EC2: Instalados Docker, MySQL Client e WordPress via docker-compose.yml (conectado ao RDS).
 
