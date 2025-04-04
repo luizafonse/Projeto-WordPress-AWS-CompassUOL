@@ -76,7 +76,6 @@ Ponto adicional para o trabalho utilizar a instalação via script de Start Inst
 
 ![1](/imgs/doc.png)
 
-<hr>
 
 ### Primeira etapa `local`: Criação do ambiente de testes.
 
@@ -150,3 +149,119 @@ sudo systemctl enable docker
 sudo systemctl start docker
 ```
 </div>
+
+### Segunda etapa `local`: Teste de implementação do *Wordpress*.
+
+<div>
+<details align="left">
+    <summary></summary>
+Para o projeto, será necessário nomear sua rede (redefonte), e criar dois volumes, um para armazenar os arquivos do WordPress e o outro para o banco de dados.
+
+
+Criação de volumes para arquivos do site e do banco de dados.
+
+```
+#Cria um volume para o Wordpress.
+docker volume create wordp
+
+#Criação do volume para o banco MySQL.
+docker volume create dbm
+
+#Verificação dos volumes em listagem.
+docker volume ls
+```
+
+
+3- Criar uma rede para permitir uma conexão entre o banco e o site.
+
+```
+#Cria uma rede com o nome 'redefonte'.
+docker network create redefonte
+
+#Verificação da criação da rede em listagem.
+docker network ls
+```
+
+4- Criar pastas para armazenar arquivos referentes ao projeto.
+
+```
+1- mkdir projetinho
+2- cd projetinho
+
+----------------------------------------------------------------------------------------
+
+1- Cria uma diretório com o nome 'projetinho'
+2- Entra no diretório especificado (Por mais leigo que seja, fazer uma estrutura para um projeto é essencial).
+```
+
+5- Checar a documentação  do docker-hub
+
+```
+https://hub.docker.com/_/wordpress
+```
+
+6- Criar uma abstração do banco de dados (Opcional).
+
+```
+|- DB NAME 'projetinho'
+|-- DB USER 'cariani'
+|-- DB PASSWORD '0311'
+```
+
+7- Criar um compose seguindo a documentação acima.
+
+nano `docker-compose.yml`: 
+```
+services:
+  web:
+    image: wordpress
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: cariani
+      WORDPRESS_DB_PASSWORD: 0311
+      WORDPRESS_DB_NAME: projetinho
+    volumes:
+      - wordp:/var/www/html
+    networks:
+      - tunel
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: projetinho
+      MYSQL_USER: cariani
+      MYSQL_PASSWORD: 0311
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - dbm:/var/lib/mysql
+    networks:
+      - tunel
+
+networks:
+  tunel:
+    driver: bridge
+
+volumes:
+  wordp:
+  dbm:
+
+```
+
+8- Executar o compose, e após o teste apagar ele.
+
+```
+1- docker compose up -d
+
+2- docker compose down
+
+----------------------------------------------------------------------------------------
+ 
+1- Executa o arquivo 'docker-compose.yml'
+2- Exclui os containers gerados(Caso não tenha criado os volumes e a rede antes de executar, o mesmo irá criar as redes serão excluidas más os volumes permanecerão)
+```
+
+9- Resultado.
