@@ -358,3 +358,33 @@ docker compose up -d
 <hr>
 </div>
 
+### Configuração do serviço de Load Balancer AWS para a aplicação Wordpress
+
+Primeira Etapa AWS: Criação da Rede e Teste sem ALB/ASG
+<div>
+
+1- VPC: Criada para isolar os recursos.
+
+Criação da vpc:
+![01](/imgs/createvpc.png)
+![02](/imgs/createvpc2.png)
+
+2- Grupos de Segurança: Configurados para RDS, EC2 e futuros serviços.
+
+![03](/imgs/criacoesdesg.png)
+
+3- RDS (MySQL): Especificações: 
+
+- RDS com MySQL, sem Multi-AZ e instâncias db.t3.micro
+Com nome, usuario, senha, e nome da database 
+
+![alt text](/imgs/image.png)
+![alt text](/imgs/image2.png)
+
+Após a criação do banco de dados, RDS > escolha o seu banco > security > altere a regra de entrada pro grupo de segurança que vai estar sua ec2.
+
+4- EC2: Instalados Docker, MySQL Client e WordPress via docker-compose.yml (conectado ao RDS).
+
+
+
+</div>
