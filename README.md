@@ -157,7 +157,7 @@ sudo systemctl start docker
     <summary></summary>
 Para o projeto, será necessário nomear sua rede (redefonte), e criar dois volumes, um para armazenar os arquivos do WordPress e o outro para o banco de dados.
 
-
+<hr>
 Criação de volumes para arquivos do site e do banco de dados.
 
 ```
@@ -172,7 +172,7 @@ docker volume ls
 ```
 
 
-3- Criar uma rede para permitir uma conexão entre o banco e o site.
+Criação da rede para permitir uma conexão entre o banco e o site.
 
 ```
 #Cria uma rede com o nome 'redefonte'.
@@ -182,86 +182,88 @@ docker network create redefonte
 docker network ls
 ```
 
-4- Criar pastas para armazenar arquivos referentes ao projeto.
+Criação das pastas para armazenar arquivos referentes ao projeto, fazer uma estrutura é importante para sua execução de maneira palpável.
 
 ```
-1- mkdir projetinho
-2- cd projetinho
+#Criação de pasta "wordpress"
+mkdir wordpress
 
-----------------------------------------------------------------------------------------
-
-1- Cria uma diretório com o nome 'projetinho'
-2- Entra no diretório especificado (Por mais leigo que seja, fazer uma estrutura para um projeto é essencial).
+#Entra no diretório 
+cd wordpress
 ```
 
-5- Checar a documentação  do docker-hub
-
+Realizar a checagem no docker hub seguindo sua documentação:
 ```
 https://hub.docker.com/_/wordpress
 ```
 
-6- Criar uma abstração do banco de dados (Opcional).
+Estipule e guarde as informações do seu Banco em um arquivo de texto separado.
 
 ```
-|- DB NAME 'projetinho'
-|-- DB USER 'cariani'
-|-- DB PASSWORD '0311'
+|- DB NAME 'dbwordpress'
+|-- DB USER 'afonsomain'
+|-- DB PASSWORD '1234'
 ```
 
-7- Criar um compose seguindo a documentação acima.
+Se torna necessário a realização de um docker compose para comunicação das imagens do MySQL e do WordPress:
 
-nano `docker-compose.yml`: 
+
 ```
+nano `docker-compose.yml`
+
+--------------------------------------------------------
 services:
-  web:
+  wordpress:
     image: wordpress
     restart: always
     ports:
       - "80:80"
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: cariani
-      WORDPRESS_DB_PASSWORD: 0311
-      WORDPRESS_DB_NAME: projetinho
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_USER: afonsomain
+      WORDPRESS_DB_PASSWORD: 1234
+      WORDPRESS_DB_NAME: dbwordpress
     volumes:
-      - wordp:/var/www/html
+      - wordpress:/var/www/html
     networks:
-      - tunel
+      - redefonte
 
-  db:
+  database:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: projetinho
-      MYSQL_USER: cariani
-      MYSQL_PASSWORD: 0311
+      MYSQL_DATABASE: dbwordpress
+      MYSQL_USER: afonsomain
+      MYSQL_PASSWORD: 1234
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - dbm:/var/lib/mysql
     networks:
-      - tunel
+      - redefonte
 
 networks:
-  tunel:
+  redefonte:
     driver: bridge
 
 volumes:
-  wordp:
-  dbm:
+  wordpress:
+  database:
+--------------------------------------------------------
+```
+Executar o compose, e após o teste apagar ele.
 
 ```
+#Executa o arquivo 'docker-compose.yml'
+docker compose up -d
 
-8- Executar o compose, e após o teste apagar ele.
-
-```
-1- docker compose up -d
-
-2- docker compose down
-
-----------------------------------------------------------------------------------------
- 
-1- Executa o arquivo 'docker-compose.yml'
-2- Exclui os containers gerados(Caso não tenha criado os volumes e a rede antes de executar, o mesmo irá criar as redes serão excluidas más os volumes permanecerão)
+#Exclui os containers e manterá os volumes
+docker compose down
 ```
 
-9- Resultado.
+Por fim, acesse seu localhost com as portas usadas e ele deverá redirecionar corretamente: 
+
+![5](/imgs/wphome.png)
+
+Após logar no WordPress:
+
+![6](/imgs/bemvindowp.png)
